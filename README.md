@@ -1,6 +1,6 @@
-# client-template
+# Checkers
 
-Serves as a template for client JavaScript applications.
+This is a Checkers game.
 
 It uses:
 * Jade
