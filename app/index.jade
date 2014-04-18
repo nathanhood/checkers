@@ -9,29 +9,29 @@ html(lang='en')
     link(rel='stylesheet', href='./css/app.css')
   body
     h1 Checkers
-
-    table#board
-      thead
-      tbody
-        - for(var i = 0; i < 4; i++)
-          tr
-            td.checkers-white
-            td.checkers-black
-            td.checkers-white
-            td.checkers-black
-            td.checkers-white
-            td.checkers-black
-            td.checkers-white
-            td.checkers-black
-          tr
-            td.checkers-black
-            td.checkers-white
-            td.checkers-black
-            td.checkers-white
-            td.checkers-black
-            td.checkers-white
-            td.checkers-black
-            td.checkers-white
+    .boardbackground
+      table#board
+        thead
+        tbody
+          - for(var i = 0; i < 4; i++)
+            tr
+              td.checkers-white
+              td.checkers-black.valid
+              td.checkers-white
+              td.checkers-black.valid
+              td.checkers-white
+              td.checkers-black.valid
+              td.checkers-white
+              td.checkers-black.valid
+            tr
+              td.checkers-black.valid
+              td.checkers-white
+              td.checkers-black.valid
+              td.checkers-white
+              td.checkers-black.valid
+              td.checkers-white
+              td.checkers-black.valid
+              td.checkers-white
 
 
 

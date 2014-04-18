@@ -5,21 +5,32 @@
   $(document).ready(init);
 
   function init(){
+    boardCoordinates();
     initializeBoard();
+    $('#board').on('click', '.valid .current', select);
+    $('.valid').on('click', '.valid', regMove);
   }
-  //
-  // function assignCoordinates(){
-  //   var $td = $('#board > tbody > tr > td');
-  //
-  //   for(var i = 0; i < $td.length; i++){
-  //     var y = $(i).parent().index();
-  //     var x = $(i).index();
-  //     $td[i].data('x', x);
-  //     $td[i].data('y', y);
-  //   }
-  // }
 
-  function initializeBoard(){
+
+
+  function select(){
+
+    $(this).addClass('selected');
+    // var td = $(this).parent();
+    // var x = $(td).data('x');
+    // var y = $(td).data('y');
+    //
+    // }
+    // regMove(x,y);
+  }
+
+  function regMove(){
+    debugger;
+    $('img').remove('.selected');
+    // (this).removeClass('selected');
+  }
+
+  function boardCoordinates(){
     for(var j = 0; j < $('#board > tbody > tr').length; j++){
       var row = $('#board > tbody > tr')[j];
       var $row = $(row);
@@ -33,7 +44,25 @@
     }
   }
 
-
+  function initializeBoard(){
+    var td;
+    for(var i = 0; i < 24; i++){
+      td = $('#board > tbody > tr >td')[i];
+      if($(td).hasClass('checkers-black')){
+        var $img = $('<img>').addClass('playerA visible current');
+        $(td).addClass('occupied').append($img);
+        $img.attr('src', '../media/' + 'piece.png');
+      }
+    }
+    for(var j = 40; j < 64; j++){
+      td = $('#board > tbody > tr >td')[j];
+      if($(td).hasClass('checkers-black')){
+        var $img2 = $('<img>').addClass('playerB visible');
+        $(td).addClass('occupied').append($img2);
+        $img2.attr('src', '../media/' + 'piece.png');
+      }
+    }
+  }
 
 
 
