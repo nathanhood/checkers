@@ -25,7 +25,6 @@
   }
 
   function move(){
-    debugger;
     moveTarget = $(this);
 
     var finalX = moveTarget.data('x');
@@ -73,6 +72,30 @@
 
       selected.removeClass('occupied current selected');
       moveTarget.addClass('occupied current');
+
+      if(selected.hasClass('playerA')){
+        selected.removeClass('playerA');
+        moveTarget.addClass('playerA');
+        if(moveTarget.data('y') === 7){
+          moveTarget.addClass('king');
+          var $kingA = $('<img>').attr('src', './media/kingA.gif');
+          moveTarget.empty();
+          moveTarget.append($kingA);
+        }
+      } else {
+        selected.removeClass('playerB');
+        moveTarget.addClass('playerB');
+        if(moveTarget.data('y') === 0){
+          moveTarget.addClass('king');
+          var $kingB = $('<img>').attr('src', './media/kingB.gif');
+          moveTarget.empty();
+          moveTarget.append($kingB);
+        }
+      }
+      if(selected.hasClass('king')){
+        selected.removeClass('king');
+        moveTarget.addClass('king');
+      }
     }
   }
 
