@@ -72,8 +72,7 @@
 
       selected.removeClass('occupied current selected');
       moveTarget.addClass('occupied current');
-
-      if(selected.hasClass('playerA')){
+    if(selected.hasClass('playerA')){
         selected.removeClass('playerA');
         moveTarget.addClass('playerA');
         if(moveTarget.data('y') === 7){
@@ -114,33 +113,6 @@
     return false;
   }
 
-    // var x = $(td).data('x');
-    // var y = $(td).data('y');
-    // selected =
-    // var a = $('td[data-x=][data-y=]');
-    // debugger;
-    // for(var i = -1; i < 2; i+=2){
-    //   x = x - i;
-    //   for(var j =  -1; j < 2; i+=2){
-    //     y = y - j;
-    //     var possibleX = $(td).attr('data-x', i);
-    //     var possibleY = $(td).attr('data-y', j);
-    //     $('td[data-x="possibleX"][data-y="possibleY"]').addClass('possible');
-    //   }
-    // }
-
-    // if($('.valid').data('x') === x-- || $('.valid').data('x') === x++){
-    //   console.log($('.valid').data('x'));
-  // }
-
-
-  // function regMove(){
-    // if(x-- || x++ && y-- || y++){
-    //
-    // }
-    // $('img').remove('.selected');
-    // (this).removeClass('selected');
-  // }
 
   function boardCoordinates(){
     for(var j = 0; j < $('#board > tbody > tr').length; j++){
@@ -163,7 +135,7 @@
       if($(td).hasClass('checkers-black')){
         var $img = $('<img>');
         $(td).addClass('playerA occupied current').append($img);
-        $img.attr('src', '../media/' + 'piece.png');
+        $img.attr('src', './media/' + 'piece.png');
       }
     }
     for(var j = 40; j < 64; j++){
@@ -171,7 +143,7 @@
       if($(td).hasClass('checkers-black')){
         var $img2 = $('<img>');
         $(td).addClass('playerB occupied').append($img2);
-        $img2.attr('src', '../media/' + 'piece.png');
+        $img2.attr('src', './media/' + 'kingA.gif');
       }
     }
   }
