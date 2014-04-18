@@ -25,6 +25,7 @@
   }
 
   function move(){
+    debugger;
     moveTarget = $(this);
 
     var finalX = moveTarget.data('x');
@@ -39,13 +40,29 @@
     if(Math.abs(vector[0]) + Math.abs(vector[1]) === 2){
       if(direction()){
         movePiece();
+        endTurn();
       }
     } else if(Math.abs(vector[0]) + Math.abs(vector[1]) === 4){
       if(direction()){
-        movePiece();
-        
+        var avgX = (finalX + initialX) / 2;
+        var avgY = (finalY + initialY) / 2;
+        var $deadPiece = $('td[data-x=' + avgX + '][data-y=' + avgY +']');
+
+        if($deadPiece.hasClass('occupied') && !$deadPiece.hasClass('current')){
+          $deadPiece.empty();
+          $deadPiece.removeClass('occupied');
+          movePiece();
+          endTurn();
+        }
       }
     }
+  }
+
+  function endTurn(){
+    var $currentPlayer = $('td.current');
+    var $newPlayer = $('td.occupied');
+    $newPlayer.addClass('current');
+    $currentPlayer.removeClass('current');
   }
 
   function movePiece(){
@@ -65,17 +82,13 @@
     if(selected.hasClass('king')){
       return true;
     }
-    if(selected.hasClass('playerA') && finalY > initialY){
-      return true;
-    } else {
-      return false;
-    }
 
-    if(finalY < initialY){
-      return true;
-    } else {
-      return false;
-    }
+    if(selected.hasClass('playerA') && finalY > initialY){
+        return true;
+      } else if(selected.hasClass('playerB') && finalY < initialY){
+        return true;
+      }
+    return false;
   }
 
     // var x = $(td).data('x');
