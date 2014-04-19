@@ -6,6 +6,7 @@
 
   var selected;
   var moveTarget;
+  var continueTurn = false;
 
   function init(){
     boardCoordinates();
@@ -36,13 +37,14 @@
     var vector = [];
     vector.push(finalX - initialX);
     vector.push(finalY - initialY);
+
     if(Math.abs(vector[0]) + Math.abs(vector[1]) === 2){
-      if(direction()){
+      if(direction(selected, moveTarget)){
         movePiece();
         endTurn();
       }
     } else if(Math.abs(vector[0]) + Math.abs(vector[1]) === 4){
-      if(direction()){
+      if(direction(selected, moveTarget)){
         var avgX = (finalX + initialX) / 2;
         var avgY = (finalY + initialY) / 2;
         var $deadPiece = $('td[data-x=' + avgX + '][data-y=' + avgY +']');
@@ -51,11 +53,16 @@
           $deadPiece.empty();
           $deadPiece.removeClass('occupied');
           movePiece();
-          endTurn();
+          if(checkPotential() < 4){
+            continueTurn = true;
+          } else {
+            endTurn();
+          }
         }
       }
     }
   }
+
 
   function endTurn(){
     var $currentPlayer = $('td.current');
@@ -98,19 +105,62 @@
     }
   }
 
-  function direction(){
-    var finalY = moveTarget.data('y');
-    var initialY = selected.data('y');
-    if(selected.hasClass('king')){
+  function direction(currentPosition, targetPosition){
+    var finalY = targetPosition.data('y');
+    var initialY = currentPosition.data('y');
+    if(currentPosition.hasClass('king')){
       return true;
     }
 
-    if(selected.hasClass('playerA') && finalY > initialY){
+    if(currentPosition.hasClass('playerA') && finalY > initialY){
         return true;
-      } else if(selected.hasClass('playerB') && finalY < initialY){
+      } else if(currentPosition.hasClass('playerB') && finalY < initialY){
         return true;
       }
     return false;
+  }
+
+  function average(x, y){
+    return (x+y) / 2;
+  }
+
+  function generateDead(currentPosition, possibleMove){ //generates location of possible dead piece(s)
+    var avgX = average(currentPosition.data('x'), possibleMove.data('x'));
+    var avgY = average(currentPosition.data('y'), possibleMove.data('y'));
+    return $('td[data-x=' + avgX + '][data-y=' + avgY + ']');
+
+  }
+
+  function checkPotential(){
+    var potentialX = [];
+    var potentialY = [];
+    var potentialTargets = [];
+
+    //generates x,y values of four possible moves for sequential turns
+    for(var i = -2; i < 3; i + 4){
+      potentialX.push(moveTarget.data('x') + i);
+      potentialY.push(moveTarget.data('y') + i);
+    }
+
+    //populates tds of all four possible move locales for sequential turns
+    for(var j = 0; j < 2; j++){
+      for(var k = 0; k < 2; k++){
+        potentialTargets.push($('td[data-x=' + potentialX[j] + '][data-y=' + potentialY[k] +']'));
+      }
+    }
+
+    //filter possible moves
+    debugger;
+    var spliceTargets = [];
+    for(var l = 0; l < 4; l++){
+      var $dead = generateDead(moveTarget, potentialTargets[l]);
+      if(potentialTargets[l].hasClass('occupied') || !direction(moveTarget, potentialTargets[l])){
+        if($dead.hasClass('current') || !$dead.hasClass('occupied')){
+          spliceTargets.push();
+        }
+      }
+    }
+    return spliceTargets.length;
   }
 
 
