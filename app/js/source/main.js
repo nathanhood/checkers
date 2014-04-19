@@ -6,7 +6,7 @@
 
   var selected;
   var moveTarget;
-  var continueTurn = false;
+
 
   function init(){
     boardCoordinates();
@@ -43,6 +43,7 @@
         movePiece();
         endTurn();
       }
+      debugger;
     } else if(Math.abs(vector[0]) + Math.abs(vector[1]) === 4){
       if(direction(selected, moveTarget)){
         var avgX = (finalX + initialX) / 2;
@@ -53,9 +54,7 @@
           $deadPiece.empty();
           $deadPiece.removeClass('occupied');
           movePiece();
-          if(checkPotential() < 4){
-            continueTurn = true;
-          } else {
+          if(checkPotential() < 3){
             endTurn();
           }
         }
@@ -156,10 +155,12 @@
       var $dead = generateDead(moveTarget, potentialTargets[l]);
       if(potentialTargets[l].hasClass('occupied') || !direction(moveTarget, potentialTargets[l])){
         if($dead.hasClass('current') || !$dead.hasClass('occupied')){
-          spliceTargets.push();
+          spliceTargets.push(l);
         }
       }
     }
+
+    console.log(spliceTargets.length);
     return spliceTargets.length;
   }
 
