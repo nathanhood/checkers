@@ -8,7 +8,15 @@ html(lang='en')
     //- link(rel='stylesheet', href='http://yui.yahooapis.com/pure/0.5.0-rc-1/grids-responsive-min.css')
     link(rel='stylesheet', href='./css/app.css')
   body
-    h1 Checkers
+    .header
+      #checkers Checkers:
+      #beatles
+        img(src='./media/beatlesheader400px.png')
+      #vs VS
+      #stones
+        img(src='./media/stonesheader500px.png')
+
+
     .boardbackground
       table#board
         thead
@@ -32,7 +40,6 @@ html(lang='en')
               td.checkers-white
               td.checkers-black.valid
               td.checkers-white
-
 
 
     script(src='./js/vendor/jquery-2.1.0.js')

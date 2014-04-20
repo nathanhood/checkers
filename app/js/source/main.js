@@ -37,7 +37,7 @@
       if($(td).hasClass('checkers-black')){
         var $img = $('<img>');
         $(td).addClass('playerA occupied current').append($img);
-        $img.attr('src', './media/' + 'piece.png');
+        $img.attr('src', './media/' + 'beatles_logo80px.png');
       }
     }
     for(var j = 40; j < 64; j++){
@@ -45,7 +45,7 @@
       if($(td).hasClass('checkers-black')){
         var $img2 = $('<img>');
         $(td).addClass('playerB occupied').append($img2);
-        $img2.attr('src', './media/' + 'kingA.gif');
+        $img2.attr('src', './media/' + 'stones_logo80px.png');
       }
     }
   }
@@ -134,7 +134,7 @@
         moveTarget.addClass('playerA');
         if(moveTarget.data('y') === 7){
           moveTarget.addClass('king');
-          var $kingA = $('<img>').attr('src', './media/kingA.gif');
+          var $kingA = $('<img>').attr('src', './media/lennon80px.png');
           moveTarget.empty();
           moveTarget.append($kingA);
         }
@@ -143,7 +143,7 @@
         moveTarget.addClass('playerB');
         if(moveTarget.data('y') === 0){
           moveTarget.addClass('king');
-          var $kingB = $('<img>').attr('src', './media/kingB.gif');
+          var $kingB = $('<img>').attr('src', './media/jagger80px.png');
           moveTarget.empty();
           moveTarget.append($kingB);
         }
@@ -218,12 +218,13 @@
   }
 
   function endGame(){
-    if($('td.current').length === 0){
-      if($('td.playerA').length === 0){
-        alert('The Beatles Win!');
-      } else {
+    var $playerA = $('td.playerA');
+    var $playerB = $('td.playerB');
+
+    if($('td.current').length === 0 && $playerA.length === 0){
         alert('The Rolling Stones Win!');
-      }
+    } else if($('td.current').length === 0 && $playerB.length === 0){
+        alert('The Beatles Win!');
     }
   }
 
