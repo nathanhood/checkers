@@ -35,7 +35,7 @@
     for(var i = 0; i < 24; i++){
       td = $('#board > tbody > tr >td')[i];
       if($(td).hasClass('checkers-black')){
-        var $img = $('<img>');
+        var $img = $('<img class="checkers-piece">');
         $(td).addClass('playerA occupied current').append($img);
         $img.attr('src', './media/' + 'beatles_logo80px.png');
       }
@@ -43,7 +43,7 @@
     for(var j = 40; j < 64; j++){
       td = $('#board > tbody > tr >td')[j];
       if($(td).hasClass('checkers-black')){
-        var $img2 = $('<img>');
+        var $img2 = $('<img class="checkers-piece">');
         $(td).addClass('playerB occupied').append($img2);
         $img2.attr('src', './media/' + 'stones_logo80px.png');
       }
@@ -134,7 +134,7 @@
         moveTarget.addClass('playerA');
         if(moveTarget.data('y') === 7){
           moveTarget.addClass('king');
-          var $kingA = $('<img>').attr('src', './media/lennon80px.png');
+          var $kingA = $('<img class="king-piece">').attr('src', './media/lennon80px.png');
           moveTarget.empty();
           moveTarget.append($kingA);
         }
@@ -143,7 +143,7 @@
         moveTarget.addClass('playerB');
         if(moveTarget.data('y') === 0){
           moveTarget.addClass('king');
-          var $kingB = $('<img>').attr('src', './media/jagger80px.png');
+          var $kingB = $('<img class="king-piece">').attr('src', './media/jagger80px.png');
           moveTarget.empty();
           moveTarget.append($kingB);
         }
